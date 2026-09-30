@@ -1,0 +1,44 @@
+import SearchEntry from './SearchEntry';
+import LanguageSwitch from './LangSelect';
+import Notification from './Notification';
+import ThemeToggle from './ThemeToggle';
+import FullscreenToggle from './FullscreenToggle';
+import SettingButton from './SettingButton';
+import UserMenu from './UserMenu';
+import styles from './style.module.styl';
+import Logo from './Logo';
+
+export default function HeaderBar() {
+  return (
+    <div className={styles.navbar}>
+      <div className="flex items-center w-[calc(100%-540px)]">
+        <Logo />
+      </div>
+      <ul className={styles.right}>
+        <li>
+          <SearchEntry />
+        </li>
+        <li>
+          <LanguageSwitch />
+        </li>
+        <li>
+          <Notification />
+        </li>
+        <li>
+          <ThemeToggle />
+        </li>
+        <li>
+          <FullscreenToggle />
+        </li>
+        <li>
+          <SettingButton />
+        </li>
+        <li>
+          <UserMenu />
+        </li>
+      </ul>
+    </div>
+  );
+}
+
+export type * from './types';

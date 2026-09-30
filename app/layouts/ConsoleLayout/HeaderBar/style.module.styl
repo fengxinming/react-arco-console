@@ -1,0 +1,142 @@
+.navbar
+  display flex
+  justify-content space-between
+  border-bottom 1px solid var(--color-border)
+  box-sizing border-box
+  background-color var(--color-bg-2)
+  height 100%
+  width 100%
+
+.left
+  display flex
+  align-items center
+  gap 16px
+
+.logo
+  display flex
+  align-items center
+  width 100%
+  padding-left 20px
+  box-sizing border-box
+
+.logo-name
+  color var(--color-text-1)
+  font-weight 500
+  font-size 20px
+  margin-left 10px
+
+.collapse-toggle
+  display inline-flex
+  align-items center
+  justify-content center
+  width 32px
+  height 32px
+  border-radius 4px
+  cursor pointer
+  color var(--color-text-2)
+  margin-left 20px
+
+  &:hover
+    background var(--color-fill-2)
+    color s('rgb(var(--primary-6))')
+
+.username
+  cursor pointer
+
+.right
+  display flex
+  list-style none
+  padding-right 20px
+  margin 0
+
+  li
+    padding 0 8px
+    display flex
+    align-items center
+
+  a
+    text-decoration none
+    color var(--color-text-1)
+
+.menu-wide
+  width 640px
+
+.icon-button
+  font-size 16px
+  border 1px solid var(--color-border-2)
+
+  > svg
+    vertical-align -3px
+
+// 消息浮层
+.notice-panel
+  width 400px
+  max-height 800px
+  overflow-y auto
+  background-color var(--color-bg-popup)
+  border 1px solid var(--color-border-2)
+  border-radius var(--border-radius-medium)
+  box-shadow var(--shadow2-down, 0 4px 10px rgba(0, 0, 0, 0.1))
+
+  :global(.arco-tabs-header-nav)
+    padding 8px 16px
+    border-bottom 1px solid var(--color-border-2)
+
+  :global(.arco-tabs-content)
+    padding-top 0
+
+  :global(.arco-list-item-meta)
+    align-items flex-start
+
+  :global(.arco-list-item-meta-content)
+    width 100%
+
+.notice-empty
+  padding 24px 0
+  text-align center
+  color var(--color-text-3)
+
+.notice-content
+  white-space nowrap
+  overflow hidden
+  text-overflow ellipsis
+  color var(--color-text-2)
+  font-size 13px
+
+.notice-footer-item
+  display flex
+  justify-content center
+  width 50%
+
+  &:first-child
+    border-right 1px solid var(--color-border-2)
+
+// 搜索框
+.search-box
+  :global(.arco-input-wrapper)
+    background-color var(--color-fill-2)
+    border-radius 16px
+
+  :global(.arco-input-inner-wrapper)
+    border-radius 16px
+
+  svg
+    font-size 16px
+
+.search-item
+  padding 8px 12px
+  border-radius 6px
+  cursor pointer
+
+  &:hover
+    background var(--color-fill-2)
+
+.search-empty
+  padding 24px 0
+  text-align center
+  color var(--color-text-3)
+
+.dropdown-icon
+  margin-right 8px
+  font-size 16px
+  vertical-align text-bottom

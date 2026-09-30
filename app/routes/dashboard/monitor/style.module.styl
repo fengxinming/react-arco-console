@@ -1,0 +1,60 @@
+.studio
+  &-wrapper
+    :global(.arco-card-body)
+      padding-top 0 !important
+
+  &-preview
+    width 100%
+    max-width 600px
+    display block
+    margin 0 auto
+
+.chat-panel
+  height 100%
+
+  :global(.arco-card-body)
+    height 100%
+    display flex
+    flex-direction column
+
+  h6
+    margin-top 0
+    margin-bottom 16px
+
+.message-item
+  font-size 12px
+  line-height 20px
+  padding 8px
+  border-radius 2px
+
+  &-actions
+    display flex
+    opacity 0
+
+    &-item
+      margin-right 4px
+      font-size 14px
+      color var(--color-text-3)
+      width 20px
+      height 20px
+      border-radius 50%
+      display flex
+      justify-content center
+      align-items center
+      cursor pointer
+
+      &:hover
+        background-color s('rgb(var(--gray-3))')
+
+      &:last-child
+        margin-right 0
+
+  &-collected
+    .message-item-actions-collect
+      color s('rgb(var(--gold-6))')
+
+  &:hover
+    background-color s('rgb(var(--gray-2))')
+
+    .message-item-actions
+      opacity 1

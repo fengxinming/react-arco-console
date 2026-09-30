@@ -1,0 +1,9 @@
+{
+  "colorWeak": false,
+  "navbar": true,
+  "menu": true,
+  "footer": true,
+  "themeColor": "#0070cc",
+  "menuWidth": 220,
+  "navMode": "inline"
+}

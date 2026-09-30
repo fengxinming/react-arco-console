@@ -1,0 +1,74 @@
+import { Avatar, Space, Skeleton } from '@arco-design/web-react';
+import { IconCamera, IconLocation, IconUser, IconHome } from '@arco-design/web-react/icon';
+import { useUserStore } from '~/store';
+import type { UserText } from './types';
+import styles from './style.module.styl';
+
+function Text({ loading, children }: UserText) {
+  return (
+    <span className={styles['user-msg-text']}>
+      <Skeleton
+        className="inline-block"
+        loading={loading}
+        text={{
+          rows: 1,
+          style: { width: '100px', height: '20px', marginBottom: '-4px' },
+          width: ['100%'],
+        }}
+        animation
+      >
+        {children}
+      </Skeleton>
+    </span>
+  );
+}
+
+/** 个人信息头部:居中头像(可换) + 姓名 + 职位/组织/定位。自取 /user/info。 */
+export default function UserInfoHeader() {
+  const userInfo = useUserStore((s) => s.user);
+  const loading = !userInfo;
+
+  return (
+    <div className={styles.header}>
+      <Space size={8} direction="vertical" align="center" className={styles['header-content']}>
+        <Skeleton
+          loading={loading}
+          text={{ rows: 0 }}
+          image={{ style: { width: '64px', height: '64px' }, shape: 'circle' }}
+          animation
+        >
+          <Avatar size={64} triggerIcon={<IconCamera />}>
+            <img src={userInfo?.avatar} alt="avatar" />
+          </Avatar>
+        </Skeleton>
+        <Skeleton
+          loading={loading}
+          text={{
+            rows: 1,
+            style: { width: '100px', height: '24px' },
+            width: ['100%'],
+          }}
+          animation
+        >
+          <div className="font-medium text-[16px]/[24px]">{userInfo?.name}</div>
+        </Skeleton>
+        <div className={styles['user-msg']}>
+          <Space size={18}>
+            <div className={styles['user-msg']}>
+              <IconUser />
+              <Text loading={loading}>{userInfo?.jobName}</Text>
+            </div>
+            <div className={styles['user-msg']}>
+              <IconHome />
+              <Text loading={loading}>{userInfo?.organizationName}</Text>
+            </div>
+            <div className={styles['user-msg']}>
+              <IconLocation />
+              <Text loading={loading}>{userInfo?.locationName}</Text>
+            </div>
+          </Space>
+        </div>
+      </Space>
+    </div>
+  );
+}
