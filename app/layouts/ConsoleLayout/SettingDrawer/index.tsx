@@ -37,7 +37,6 @@ export default function SettingDrawer({
   const menuWidth = useSettingsStore((s) => s.menuWidth);
   const colorWeak = useSettingsStore((s) => s.colorWeak);
   const navMode = useSettingsStore((s) => s.navMode);
-  const setSettings = useSettingsStore((s) => s.setSettings);
 
   // 对齐参考：导出与 settings.json 结构完全一致的配置（6 个字段、同 key 顺序），
   // 用户可直接粘回 app/settings.json，让配置真正作用于项目。
@@ -85,27 +84,39 @@ export default function SettingDrawer({
             type="button"
             size="small"
             value={navMode}
-            onChange={(v) => setSettings({ navMode: v as NavMode })}
+            onChange={(v) => useSettingsStore.setState({ navMode: v as NavMode })}
           >
             <Radio value="inline">{t('settings.navMode.inline')}</Radio>
             <Radio value="horizontal">{t('settings.navMode.horizontal')}</Radio>
           </Radio.Group>
         </Row>
         <Row label={t('settings.navbar')}>
-          <Switch size="small" checked={navbar} onChange={(v) => setSettings({ navbar: v })} />
+          <Switch
+            size="small"
+            checked={navbar}
+            onChange={(v) => useSettingsStore.setState({ navbar: v })}
+          />
         </Row>
         <Row label={t('settings.menu')}>
-          <Switch size="small" checked={menu} onChange={(v) => setSettings({ menu: v })} />
+          <Switch
+            size="small"
+            checked={menu}
+            onChange={(v) => useSettingsStore.setState({ menu: v })}
+          />
         </Row>
         <Row label={t('settings.footer')}>
-          <Switch size="small" checked={footer} onChange={(v) => setSettings({ footer: v })} />
+          <Switch
+            size="small"
+            checked={footer}
+            onChange={(v) => useSettingsStore.setState({ footer: v })}
+          />
         </Row>
         <Row label={t('settings.menuWidth')}>
           <InputNumber
             className="!w-[80px]"
             size="small"
             value={menuWidth}
-            onChange={(v) => v != null && setSettings({ menuWidth: Number(v) })}
+            onChange={(v) => v != null && useSettingsStore.setState({ menuWidth: Number(v) })}
           />
         </Row>
         <Divider />
@@ -117,7 +128,7 @@ export default function SettingDrawer({
           <Switch
             size="small"
             checked={colorWeak}
-            onChange={(v) => setSettings({ colorWeak: v })}
+            onChange={(v) => useSettingsStore.setState({ colorWeak: v })}
           />
         </Row>
         <Divider />

@@ -9,14 +9,13 @@ export default function ColorPanel() {
   const { t } = useTranslation();
   const themeColor = useSettingsStore((s) => s.themeColor);
   const theme = useSettingsStore((s) => s.theme);
-  const setSettings = useSettingsStore((s) => s.setSettings);
 
   const list = generate(themeColor, { list: true, dark: theme === 'dark' });
 
   // 只改状态，CSS 变量由 AdminLayout 统一应用（themeColor / darkMode 变化时同步），
   // 这样抽屉关闭或页面刷新后主题色依然生效，而不是像参考那样"仅临时生效"。
   const applyColor = (color: string) => {
-    setSettings({ themeColor: color });
+    useSettingsStore.setState({ themeColor: color });
   };
 
   return (

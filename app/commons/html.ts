@@ -1,44 +1,52 @@
 import { generate, getRgbStr } from '@arco-design/color';
 import i18n from '~/i18n';
-import { Language, Theme } from '~/store';
+import type { Language, Theme } from '~/store/types';
 
 /**
- * 切换主题：给 body 加 arco-theme 属性，让主题即时生效。
- *
- * @param theme
+ * 切换主题：给 body 加 arco-theme 属性。
+ * Arco 主题包按 body[arco-theme] 切换明暗 CSS 变量；@ant-design/charts 的 tooltip
+ * 等 DOM 驱动样式也读这个标记（见 app.styl）。
+ * / Switch theme: set body[arco-theme]. The Arco theme package switches light/dark CSS
+ * variables by this attribute; DOM-driven styles such as @ant-design/charts tooltips read
+ * the same marker (see app.styl).
  */
 export function setTheme(theme: Theme) {
   document.body.setAttribute('arco-theme', theme);
 }
 
-/**
- * 主题色：把当前色生成的 10 个梯度色写入 CSS 变量，让主题色即时生效。
- * 注意：本项目的 @arco-themes/react-console 走的是 --primary-* 链路
- * （组件颜色经 --color-primary-light-N: rgb(var(--primary-N)) 引用），
- * 参考默认的 --arcoblue-* 在本主题下无人使用，写在那里不会生效。
- *
- * @param themeColor
- * @param theme
- */
-export function setThemeColor(themeColor: string, theme: Theme) {
+export function generateColor(
+  themeColor: string,
+  theme: Theme,
+  cb: (propName: string, val: string) => void,
+): void {
   generate(themeColor, { list: true, dark: theme === 'dark' }).forEach((item, index) => {
-    document.body.style.setProperty(`--primary-${index + 1}`, getRgbStr(item));
+    cb(`--primary-${index + 1}`, getRgbStr(item));
   });
 }
 
 /**
- * 色弱模式：对齐参考实现，开启后给 body 加反色滤镜，关闭时还原。
- *
- * @param colorWeak
+ * 主题色：把生成的主色阶写到 body 上的 --primary-N 变量。
+ * ConfigProvider 的 cssVar 作用域不覆盖 body 级元素（如 #nprogress），
+ * 故在此同步一份供其使用，避免硬编码色值（见 app.styl）。
+ * / Theme color: write the generated --primary-N palette onto body. Elements under body
+ * (e.g. #nprogress) sit outside the ConfigProvider cssVar scope, so mirror the tokens here
+ * instead of hardcoding color values (see app.styl).
+ */
+export function setThemeColor(themeColor: string, theme: Theme): void {
+  generateColor(themeColor, theme, (propName, val) => {
+    document.body.style.setProperty(propName, val);
+  });
+}
+
+/**
+ * 色弱模式：给 body 加反色滤镜。
  */
 export function setColorWeak(colorWeak: boolean) {
   document.body.style.filter = colorWeak ? 'invert(80%)' : 'none';
 }
 
 /**
- * 切换语言：i18n 实例的 changeLanguage 方法，给 html 元素加 lang 属性。
- *
- * @param lang
+ * 切换语言：i18n 实例 changeLanguage + html lang 属性。
  */
 export function setLang(lang: Language) {
   i18n.changeLanguage(lang);

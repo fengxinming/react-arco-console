@@ -1,9 +1,5 @@
 import { Grid, Space } from '@arco-design/web-react';
-import {
-  fetchPopularContents,
-  fetchContentPercentage,
-  fetchOverview,
-} from '~/api/dashboard';
+import { fetchPopularContents, fetchContentPercentage, fetchOverview } from '~/api/dashboard';
 import type { WorkplaceLoaderData } from './types';
 import Overview from './Overview';
 import PopularContents from './PopularContents';

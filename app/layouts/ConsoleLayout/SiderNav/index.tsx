@@ -1,5 +1,6 @@
 import { Layout } from '@arco-design/web-react';
-import { IconMenuFold, IconMenuUnfold } from '@arco-design/web-react/icon';
+import { IconLeft } from '@arco-design/web-react/icon';
+import cs from 'classnames';
 import { useSettingsStore, useLayoutStore } from '~/store';
 import AppMenu from '~/components/AppMenu';
 import type { MenuRoute } from '~/config/types';
@@ -53,8 +54,13 @@ function SiderNav() {
           onOpenKeysChange={setOpenKeys}
         />
       </div>
-      <div className={styles['collapse-btn']} onClick={() => toggleCollapsed()}>
-        {collapsed ? <IconMenuUnfold /> : <IconMenuFold />}
+      <div
+        className={cs(styles['collapse-btn'], {
+          [styles['is-collapsed']]: collapsed,
+        })}
+        onClick={toggleCollapsed}
+      >
+        <IconLeft />
       </div>
     </Sider>
   );

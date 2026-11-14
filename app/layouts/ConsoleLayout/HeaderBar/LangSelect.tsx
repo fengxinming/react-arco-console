@@ -7,7 +7,6 @@ import IconButton from './IconButton';
 export default function LangSelect() {
   const { t } = useTranslation();
   const language = useSettingsStore((s) => s.lang);
-  const setSettings = useSettingsStore((s) => s.setSettings);
 
   return (
     <Select
@@ -24,7 +23,7 @@ export default function LangSelect() {
       }}
       trigger="hover"
       onChange={(value: Language) => {
-        setSettings({ lang: value });
+        useSettingsStore.setState({ lang: value });
         Message.info(t('settings.language.tip'));
       }}
     />

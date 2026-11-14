@@ -1,11 +1,13 @@
 import axios, { type AxiosRequestConfig } from 'axios';
 import { Message } from '@arco-design/web-react';
+import { createMockAdapter } from 'vite-plugin-mock-data/axios-adapter';
 import i18n from '~/i18n';
 import { useUserStore } from '~/store';
 
 const service = axios.create({
   baseURL: '/api',
   timeout: 10000,
+  adapter: createMockAdapter(),
 });
 
 service.interceptors.request.use((config) => {

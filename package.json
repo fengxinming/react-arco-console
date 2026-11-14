@@ -52,6 +52,7 @@
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
     "vite": "^8.2.2",
-    "vite-plugin-mock-data": "^8.1.1"
+    "vite-plugin-devtools-json": "^1.1.2",
+    "vite-plugin-mock-data": "^8.2.0"
   }
 }

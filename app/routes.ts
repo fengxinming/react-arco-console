@@ -3,13 +3,6 @@ import type { RouteConfig, RouteConfigEntry } from '@react-router/dev/routes';
 import { menuRoutes } from './config/menu';
 import type { MenuBranch, MenuLeaf, MenuRoute } from './config/types';
 
-export default [
-  route('login', 'routes/login/index.tsx'),
-  route('register', 'routes/register/index.tsx'),
-  index('routes/home/index.tsx'),
-  layout('layouts/ConsoleLayout/index.tsx', buildMenuRoutes(menuRoutes, [])),
-] satisfies RouteConfig;
-
 function buildMenuRoutes(menus: MenuRoute[], routes: RouteConfigEntry[]): RouteConfigEntry[] {
   for (const menu of menus) {
     const { children } = menu as MenuBranch;
@@ -24,3 +17,13 @@ function buildMenuRoutes(menus: MenuRoute[], routes: RouteConfigEntry[]): RouteC
   }
   return routes;
 }
+
+export default [
+  route('login', 'routes/login/index.tsx'),
+  route('register', 'routes/register/index.tsx'),
+  index('routes/home/index.tsx'),
+  layout(
+    'layouts/ConsoleLayout/index.tsx',
+    buildMenuRoutes(menuRoutes, [route('*', 'routes/404/index.tsx')]),
+  ),
+] satisfies RouteConfig;

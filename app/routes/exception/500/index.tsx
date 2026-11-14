@@ -12,11 +12,14 @@ export default function Exception500() {
         className={styles.result}
         status="500"
         subTitle={t('exception.result.500.description')}
-        extra={
-          <Button key="back" type="primary" onClick={() => navigate('/dashboard/workplace')}>
-            {t('exception.result.500.back')}
-          </Button>
-        }
+        extra={[
+          <Button key="backPrev" className="!mr-[16px]" onClick={() => navigate(-1)}>
+            {t('exception.result.backPrev')}
+          </Button>,
+          <Button key="backHome" type="primary" onClick={() => navigate('/')}>
+            {t('exception.result.backHome')}
+          </Button>,
+        ]}
       />
     </div>
   );

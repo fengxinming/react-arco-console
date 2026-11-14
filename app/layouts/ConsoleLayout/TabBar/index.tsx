@@ -1,19 +1,19 @@
 import { Tabs } from '@arco-design/web-react';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { useTabsStore } from '~/store';
 import styles from './style.module.styl';
 import { memo } from 'react';
+import { useLayoutStore } from '~/store';
 
 const TabPane = Tabs.TabPane;
 
 function TabBar() {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const tabs = useTabsStore((s) => s.tabs);
-  const activeKey = useTabsStore((s) => s.activeKey);
-  const removeTab = useTabsStore((s) => s.removeTab);
-  const setActive = useTabsStore((s) => s.setActive);
+  const tabs = useLayoutStore((s) => s.tabs);
+  const activeKey = useLayoutStore((s) => s.activeKey);
+  const removeTab = useLayoutStore((s) => s.removeTab);
+  const setActive = useLayoutStore((s) => s.setActive);
 
   return (
     <div className={styles.tabbar}>

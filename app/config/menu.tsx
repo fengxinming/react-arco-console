@@ -114,16 +114,16 @@ export const menuRoutes: MenuRoute[] = [
     icon: <IconBug />,
 
     children: [
-      {
-        path: '/exception/403',
-        name: 'menu.exception.403',
-        view: 'routes/exception/403/index.tsx',
-      },
-      {
-        path: '/exception/404',
-        name: 'menu.exception.404',
-        view: 'routes/exception/404/index.tsx',
-      },
+      // {
+      //   path: '/exception/403',
+      //   name: 'menu.exception.403',
+      //   view: 'routes/403/index.tsx',
+      // },
+      // {
+      //   path: '/exception/404',
+      //   name: 'menu.exception.404',
+      //   view: 'routes/exception/404/index.tsx',
+      // },
       {
         path: '/exception/500',
         name: 'menu.exception.500',

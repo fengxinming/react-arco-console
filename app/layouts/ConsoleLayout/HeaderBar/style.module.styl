@@ -123,6 +123,20 @@
   svg
     font-size 16px
 
+.search-section
+  &:not(:first-child)
+    border-top 1px solid var(--color-border-2)
+    margin-top 4px
+    padding-top 4px
+
+// 分类节点只作分组标题，不绑定跳转
+.search-group
+  padding 8px 12px 4px
+  color var(--color-text-3)
+  font-size 12px
+  cursor default
+  user-select none
+
 .search-item
   padding 8px 12px
   border-radius 6px

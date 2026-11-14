@@ -3,25 +3,53 @@ $layout-max-width = 1100px
 
 .layout
   width 100%
-  height 100%
+  height 100vh
+  display flex
+  flex-direction column
+  overflow hidden
 
   &-navbar
-    position fixed
+    position sticky
+    top 0
+    z-index 100
     width 100%
     min-width $layout-max-width
-    top 0
-    left 0
     height $nav-size-height
-    z-index 100
+    flex none
+
+  // 中间横行吃掉 100vh 减去顶栏后的高度，左右两栏各自在自己的高度里滚动。
+  &-body
+    flex 1
+    min-height 0
+    display flex
+    flex-direction row
 
   &-content
+    flex 1
+    min-height 0
+    display flex
+    flex-direction column
     background-color var(--color-fill-2)
-    min-height calc(100vh - $nav-size-height)
-    transition padding-left 0.2s
     box-sizing border-box
     overflow-x hidden
+    min-width 0
 
     &-wrapper
-      padding 16px 20px 0
-      min-height calc(100vh - $nav-size-height)
+      flex 1
+      min-height 0
+      overflow-y auto
+      padding 16px 24px 0
       box-sizing border-box
+      min-width 0
+
+  // 显示开关只切换根容器状态类，对应组件保持常驻。
+  // 状态类 + 后代选择器把特异性抬到 (0,3,0)，高于 Footer 自带的 display:flex
+  // 与 Arco 基础样式，避免 CSS 加载顺序反转时隐藏规则被覆盖。
+  &.hide-navbar :global(.arco-layout-header)
+    display none
+
+  &.hide-sider :global(.arco-layout-sider)
+    display none
+
+  &.hide-footer :global(.arco-layout-footer)
+    display none
